@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block title %}EcoPlot - Devices{% endblock %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2 class="mb-3">Cihazlarım</h2>
+        <!-- Yeni Cihaz Ekle Butonu -->
+        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addDeviceModal">+ Yeni Cihaz Ekle</button>
+        <div class="row">
+            {% for device in devices %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow border-0 h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-cpu-fill me-2" style="font-size:2rem;"></i>
+                            <h5 class="card-title mb-0">{{ device.name }}</h5>
+                        </div>
+                        <p class="mb-1"><strong>Tür:</strong> {{ device.device_type }}</p>
+                        <p class="mb-1"><strong>Marka:</strong> {{ device.brand }}</p>
+                        <p class="mb-1"><strong>Model:</strong> {{ device.model }}</p>
+                        <p class="mb-1"><strong>Güç Tüketimi:</strong> {{ device.power_consumption_watts }} W</p>
+                        <p class="mb-1"><strong>Akıllı Cihaz:</strong> {% if device.is_smart_device %}Evet{% else %}Hayır{% endif %}</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm mt-2">Düzenle</a>
+                        <a href="#" class="btn btn-outline-danger btn-sm mt-2">Sil</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+                <div class="alert alert-info">Henüz cihaz eklemediniz.</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Yeni Cihaz Ekle Modalı -->
+<div class="modal fade" id="addDeviceModal" tabindex="-1" aria-labelledby="addDeviceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="/add_device">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addDeviceModalLabel">Yeni Cihaz Ekle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name" class="form-label">Cihaz Adı</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="device_type" class="form-label">Cihaz Türü</label>
+            <input type="text" class="form-control" id="device_type" name="device_type" required>
+          </div>
+          <div class="mb-3">
+            <label for="brand" class="form-label">Marka</label>
+            <input type="text" class="form-control" id="brand" name="brand">
+          </div>
+          <div class="mb-3">
+            <label for="model" class="form-label">Model</label>
+            <input type="text" class="form-control" id="model" name="model">
+          </div>
+          <div class="mb-3">
+            <label for="power_consumption_watts" class="form-label">Güç Tüketimi (Watt)</label>
+            <input type="number" class="form-control" id="power_consumption_watts" name="power_consumption_watts" required>
+          </div>
+          <div class="mb-3">
+            <label for="is_smart_device" class="form-label">Akıllı Cihaz mı?</label>
+            <select class="form-select" id="is_smart_device" name="is_smart_device">
+              <option value="False">Hayır</option>
+              <option value="True">Evet</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="submit" class="btn btn-success">Ekle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %} 

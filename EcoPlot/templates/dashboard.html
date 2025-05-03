@@ -1,0 +1,148 @@
+<!-- EcoPlot/templates/dashboard.html -->
+{% extends "layout.html" %}
+
+{% block title %}EcoPlot - Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-2">
+        <div class="list-group">
+            <a href="{{ url_for('main.dashboard') }}" class="list-group-item list-group-item-action active">Dashboard</a>
+            <a href="/devices_page" class="list-group-item list-group-item-action">Devices</a>
+            <a href="{{ url_for('main.settings') }}" class="list-group-item list-group-item-action">Settings</a>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <div class="col-md-10">
+        <div class="row mb-4">
+            <!-- Cihazlarım Kartı -->
+            <div class="col-md-4">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Cihazlarım <span class="badge bg-light text-info">{{ devices|length }}</span></h5>
+                    </div>
+                    <div class="card-body">
+                        {% if devices and devices|length > 0 %}
+                        <ul class="list-group list-group-flush">
+                            {% for device in devices[:3] %}
+                            <li class="list-group-item">
+                                <strong>{{ device.name }}</strong> - {{ device.device_type }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <a href="/devices_page" class="btn btn-outline-info btn-sm mt-2">Tümünü Gör</a>
+                        {% else %}
+                        <div class="alert alert-info mb-0">Henüz cihaz eklemediniz.</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- Öneriler Kartı -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Öneriler
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info d-flex align-items-center">
+                            <span class="me-3" style="font-size: 2rem;">🤖</span>
+                            <div>
+                                <strong>Bulaşık makinesini 11:00'de çalıştırın</strong><br>
+                                Tahmini Tasarruf: 0.50$
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Enerji Üretim Tahmini -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        Enerji Üretim Tahmini
+                    </div>
+                    <div class="card-body">
+                        <canvas id="productionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Enerji Akışı ve Kullanım -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        Enerji Akışı
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- Basit bir enerji akış diyagramı -->
+                        <img src="https://img.icons8.com/ios-filled/100/solar-panel.png" alt="Solar Panel" style="width:48px;">&nbsp;&rarr;&nbsp;
+                        <img src="https://img.icons8.com/ios-filled/100/home.png" alt="Home" style="width:48px;">&nbsp;&rarr;&nbsp;
+                        <img src="https://img.icons8.com/ios-filled/100/electric-vehicle.png" alt="EV" style="width:48px;">
+                        <br>
+                        <span>Solar Panel (2.5 kW) &rarr; Ev (1.8 kW) &rarr; Araç Şarjı (0.6 kW)</span>
+                        <br>
+                        <img src="https://img.icons8.com/ios-filled/100/battery--v1.png" alt="Battery" style="width:48px; margin-top:10px;">
+                        <br>
+                        <span>Batarya (1.0 kW)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Enerji Kullanımı -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        Enerji Kullanımı
+                    </div>
+                    <div class="card-body">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Üretim grafiği
+    var ctx1 = document.getElementById('productionChart').getContext('2d');
+    var productionChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: ['00:00', '06:00', '12:00', '18:00', '24:00'],
+            datasets: [{
+                label: 'Üretim (kW)',
+                data: [0, 1, 2.5, 1, 0],
+                borderColor: '#28a745',
+                fill: true,
+                backgroundColor: 'rgba(40,167,69,0.1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } }
+        }
+    });
+
+    // Kullanım grafiği
+    var ctx2 = document.getElementById('usageChart').getContext('2d');
+    var usageChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['00:00', '06:00', '12:00', '18:00', '24:00'],
+            datasets: [{
+                label: 'Kullanım (kW)',
+                data: [0.5, 1, 2, 2.5, 2],
+                backgroundColor: '#17a2b8'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } }
+        }
+    });
+</script>
+{% endblock %}

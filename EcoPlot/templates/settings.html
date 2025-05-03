@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}EcoPlot - Settings{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Ayarlar</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" action="#">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Kullanıcı Adı</label>
+                        <input type="text" class="form-control" id="username" name="username" value="{{ current_user.username }}" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-posta</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ current_user.email }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Yeni Şifre</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Şifreyi değiştir...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="theme" class="form-label">Tema</label>
+                        <select class="form-select" id="theme" name="theme">
+                            <option value="light">Açık</option>
+                            <option value="dark">Koyu</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
