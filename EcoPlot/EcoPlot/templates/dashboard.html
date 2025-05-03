@@ -1,0 +1,51 @@
+<!-- EcoPlot/templates/dashboard.html -->
+{% extends "layout.html" %}
+
+{% block title %}EcoPlot - Dashboard{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1>Welcome, {{ current_user.username }}!</h1>
+        <p class="lead">This is your energy optimization dashboard.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Your Devices</h5>
+            </div>
+            <div class="card-body">
+                <p>Add your devices to get personalized recommendations.</p>
+                <a href="#" class="btn btn-outline-success">Manage Devices</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Energy Production</h5>
+            </div>
+            <div class="card-body">
+                <p>Configure your solar energy production details.</p>
+                <a href="{{ url_for('main.profile') }}" class="btn btn-outline-success">Update Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <p>View your energy optimization recommendations.</p>
+                <a href="#" class="btn btn-outline-success">View Recommendations</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

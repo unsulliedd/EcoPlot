@@ -1,0 +1,42 @@
+<!-- EcoPlot/templates/profile.html -->
+{% extends "layout.html" %}
+{% block title %}EcoPlot - Profile{% endblock %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1>Your Profile</h1>
+        <p class="lead">Manage your account and energy production details.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Account Information</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Username:</strong> {{ current_user.username }}</p>
+                <p><strong>Email:</strong> {{ current_user.email }}</p>
+                <button class="btn btn-outline-success">Edit Account</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Energy Production Setup</h5>
+            </div>
+            <div class="card-body">
+                {% if current_user.has_solar %}
+                <p><strong>Solar Capacity:</strong> {{ current_user.solar_capacity_kw }} kW</p>
+                <p><strong>Solar Panel Orientation:</strong> {{ current_user.solar_panel_orientation }}</p>
+                <p><strong>Solar Panel Tilt:</strong> {{ current_user.solar_panel_tilt }} degrees</p>
+                {% else %}
+                <p>You haven't set up your solar energy production details yet.</p>
+                {% endif %}
+                <button class="btn btn-outline-success mt-2">Configure Energy Setup</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
