@@ -52,7 +52,10 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Your account has been created! You can now log in.', 'success')
-        return redirect(url_for('auth.login'))
+        flash('Your account has been created! Please complete your profile.', 'success')
+        # Log in the user after registration
+        login_user(user)
+        # Redirect to profile page with first_visit flag
+        return redirect(url_for('main.profile', first_visit=True))
     
     return render_template('auth/register.html', title='Register', form=form)

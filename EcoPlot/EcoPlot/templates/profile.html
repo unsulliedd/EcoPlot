@@ -1,42 +1,361 @@
 <!-- EcoPlot/templates/profile.html -->
 {% extends "layout.html" %}
 {% block title %}EcoPlot - Profile{% endblock %}
+
+{% block extra_css %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="row mb-4">
     <div class="col-md-12">
         <h1>Your Profile</h1>
         <p class="lead">Manage your account and energy production details.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% if is_first_visit %}
+        <div class="welcome-banner">
+            <h4>Welcome to EcoPlot!</h4>
+            <p>Please take a moment to complete your profile to get the most out of our energy optimization platform. The more information you provide, the better our recommendations will be.</p>
+        </div>
+        {% endif %}
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="card mb-4">
-            <div class="card-header bg-success text-white">
-                <h5 class="mb-0">Account Information</h5>
+
+<form method="POST" action="{{ url_for('main.profile') }}">
+    {{ form.hidden_tag() }}
+    {% if is_first_visit %}
+    <input type="hidden" name="origin" value="registration">
+    {% endif %}
+
+    <div class="row">
+        <!-- Left Column -->
+        <div class="col-md-6">
+            <!-- Account Information Card -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Account Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Username:</strong> {{ current_user.username }}</p>
+                    <p><strong>Email:</strong> {{ current_user.email }}</p>
+                    <p><strong>Account Type:</strong> {% if current_user.is_pro %}Pro{% else %}Standard{% endif %}</p>
+                    {% if current_user.is_pro and current_user.subscription_expires %}
+                    <p><strong>Subscription Expires:</strong> {{ current_user.subscription_expires.strftime('%B %d, %Y') }}</p>
+                    {% endif %}
+                </div>
             </div>
-            <div class="card-body">
-                <p><strong>Username:</strong> {{ current_user.username }}</p>
-                <p><strong>Email:</strong> {{ current_user.email }}</p>
-                <button class="btn btn-outline-success">Edit Account</button>
+
+            <!-- Home Information Card -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Home Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-section">
+                        <h6 class="section-title">Location</h6>
+                        <div class="mb-3">
+                            {{ form.address.label(class="form-label") }}
+                            {{ form.address(class="form-control") }}
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form.city.label(class="form-label") }}
+                                {{ form.city(class="form-control") }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.state.label(class="form-label") }}
+                                {{ form.state(class="form-control") }}
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form.country.label(class="form-label") }}
+                                {{ form.country(class="form-control") }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.postal_code.label(class="form-label") }}
+                                {{ form.postal_code(class="form-control") }}
+                            </div>
+                        </div>
+
+                        <div class="optional-section" id="advancedLocationFields">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    {{ form.latitude.label(class="form-label") }}
+                                    {{ form.latitude(class="form-control") }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.longitude.label(class="form-label") }}
+                                    {{ form.longitude(class="form-control") }}
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.timezone.label(class="form-label") }}
+                                {{ form.timezone(class="form-control") }}
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-link" id="toggleLocationFields">
+                            Show Advanced Location Fields
+                        </button>
+                    </div>
+
+                    <div class="form-section">
+                        <h6 class="section-title">Home Details</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form.home_type.label(class="form-label") }}
+                                {{ form.home_type(class="form-select") }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.home_size_sqft.label(class="form-label") }}
+                                {{ form.home_size_sqft(class="form-control") }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.occupants_count.label(class="form-label") }}
+                            {{ form.occupants_count(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utility Information -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Utility Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        {{ form.utility_provider.label(class="form-label") }}
+                        {{ form.utility_provider(class="form-control") }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.electricity_rate_plan.label(class="form-label") }}
+                        {{ form.electricity_rate_plan(class="form-select") }}
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.peak_rate_per_kwh.label(class="form-label") }}
+                            {{ form.peak_rate_per_kwh(class="form-control") }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.off_peak_rate_per_kwh.label(class="form-label") }}
+                            {{ form.off_peak_rate_per_kwh(class="form-control") }}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.solar_feed_in_tariff.label(class="form-label") }}
+                        {{ form.solar_feed_in_tariff(class="form-control") }}
+                        <div class="form-text">The rate your utility pays for excess solar power sent to the grid</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-md-6">
+            <!-- Solar Energy Configuration -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Renewable Energy</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Solar Energy Section -->
+                    <div class="form-section">
+                        <h6 class="section-title">Solar Energy</h6>
+                        <div class="form-check mb-3">
+                            {{ form.has_solar(class="form-check-input toggle-section") }}
+                            {{ form.has_solar.label(class="form-check-label") }}
+                            <input type="hidden" class="section-target" value="solarDetails">
+                        </div>
+
+                        <div id="solarDetails" class="detail-section mt-3">
+                            <div class="mb-3">
+                                {{ form.solar_capacity_kw.label(class="form-label") }}
+                                {{ form.solar_capacity_kw(class="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.solar_panel_orientation.label(class="form-label") }}
+                                {{ form.solar_panel_orientation(class="form-select") }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.solar_panel_tilt.label(class="form-label") }}
+                                {{ form.solar_panel_tilt(class="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.solar_installation_date.label(class="form-label") }}
+                                {{ form.solar_installation_date(class="form-control", type="date") }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wind Energy Section -->
+                    <div class="form-section">
+                        <h6 class="section-title">Wind Energy</h6>
+                        <div class="form-check mb-3">
+                            {{ form.has_wind_turbine(class="form-check-input toggle-section") }}
+                            {{ form.has_wind_turbine.label(class="form-check-label") }}
+                            <input type="hidden" class="section-target" value="windDetails">
+                        </div>
+
+                        <div id="windDetails" class="detail-section mt-3">
+                            <div class="mb-3">
+                                {{ form.wind_turbine_capacity_kw.label(class="form-label") }}
+                                {{ form.wind_turbine_capacity_kw(class="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.wind_turbine_height_meters.label(class="form-label") }}
+                                {{ form.wind_turbine_height_meters(class="form-control") }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Battery Storage Section -->
+                    <div class="form-section">
+                        <h6 class="section-title">Battery Storage</h6>
+                        <div class="form-check mb-3">
+                            {{ form.has_battery_storage(class="form-check-input toggle-section") }}
+                            {{ form.has_battery_storage.label(class="form-check-label") }}
+                            <input type="hidden" class="section-target" value="batteryDetails">
+                        </div>
+
+                        <div id="batteryDetails" class="detail-section mt-3">
+                            <div class="mb-3">
+                                {{ form.battery_capacity_kwh.label(class="form-label") }}
+                                {{ form.battery_capacity_kwh(class="form-control") }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form.battery_brand.label(class="form-label") }}
+                                {{ form.battery_brand(class="form-control") }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EV Configuration -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Electric Vehicle</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-check mb-3">
+                        {{ form.has_ev(class="form-check-input toggle-section") }}
+                        {{ form.has_ev.label(class="form-check-label") }}
+                        <input type="hidden" class="section-target" value="evDetails">
+                    </div>
+
+                    <div id="evDetails" class="detail-section mt-3">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form.ev_manufacturer.label(class="form-label") }}
+                                {{ form.ev_manufacturer(class="form-control") }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.ev_model.label(class="form-label") }}
+                                {{ form.ev_model(class="form-control") }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.ev_battery_capacity_kwh.label(class="form-label") }}
+                            {{ form.ev_battery_capacity_kwh(class="form-control") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.ev_typical_daily_usage_kwh.label(class="form-label") }}
+                            {{ form.ev_typical_daily_usage_kwh(class="form-control") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.ev_charging_preference.label(class="form-label") }}
+                            {{ form.ev_charging_preference(class="form-select") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences & Integration -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Preferences & Integration</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-section">
+                        <h6 class="section-title">Energy Goals</h6>
+                        <div class="mb-3">
+                            {{ form.energy_savings_goal.label(class="form-label") }}
+                            {{ form.energy_savings_goal(class="form-control") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.environmental_priority.label(class="form-label") }}
+                            {{ form.environmental_priority(class="form-control") }}
+                            <div class="form-text">1 = Cost is most important, 10 = Environment is most important</div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.budget_constraints.label(class="form-label") }}
+                            {{ form.budget_constraints(class="form-control") }}
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h6 class="section-title">Communication & Integration</h6>
+                        <div class="mb-3">
+                            {{ form.notification_preferences.label(class="form-label") }}
+                            {{ form.notification_preferences(class="form-select") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.language_preference.label(class="form-label") }}
+                            {{ form.language_preference(class="form-select") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.smart_home_platform.label(class="form-label") }}
+                            {{ form.smart_home_platform(class="form-select") }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.weather_api_preference.label(class="form-label") }}
+                            {{ form.weather_api_preference(class="form-select") }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card mb-4">
-            <div class="card-header bg-success text-white">
-                <h5 class="mb-0">Energy Production Setup</h5>
-            </div>
-            <div class="card-body">
-                {% if current_user.has_solar %}
-                <p><strong>Solar Capacity:</strong> {{ current_user.solar_capacity_kw }} kW</p>
-                <p><strong>Solar Panel Orientation:</strong> {{ current_user.solar_panel_orientation }}</p>
-                <p><strong>Solar Panel Tilt:</strong> {{ current_user.solar_panel_tilt }} degrees</p>
-                {% else %}
-                <p>You haven't set up your solar energy production details yet.</p>
-                {% endif %}
-                <button class="btn btn-outline-success mt-2">Configure Energy Setup</button>
-            </div>
+
+    <!-- Submit Button -->
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            {{ form.submit(class="btn btn-success btn-lg") }}
         </div>
     </div>
-</div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 {% endblock %}

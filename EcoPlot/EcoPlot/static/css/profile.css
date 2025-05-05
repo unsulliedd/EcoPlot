@@ -1,0 +1,88 @@
+/* EcoPlot/static/css/profile.css */
+.form-section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #28a745;
+}
+
+.optional-section {
+    padding-top: 15px;
+    border-top: 1px dashed #eee;
+}
+
+.welcome-banner {
+    background-color: #f8f9fa;
+    border-left: 4px solid #28a745;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.detail-section {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border-left: 3px solid #28a745;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+    .card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+.card-header {
+    font-weight: bold;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.form-text {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.btn-success {
+    padding: 10px 30px;
+    font-weight: 600;
+}
+
+.btn-link {
+    color: #28a745;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+    .btn-link:hover {
+        text-decoration: underline;
+        color: #218838;
+    }
+
+/* Tooltip styles */
+.form-label[data-toggle="tooltip"] {
+    cursor: help;
+    border-bottom: 1px dotted #28a745;
+}
+
+/* Make sure checkboxes align properly */
+.form-check-input {
+    margin-top: 0.3rem;
+}
+
+/* Custom styling for specific sections */
+#solarDetails, #windDetails, #batteryDetails, #evDetails {
+    display: none;
+}
