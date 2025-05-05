@@ -13,7 +13,6 @@ class DeviceBrand(db.Model):
     
     # Relationships
     devices = db.relationship('Device', backref='brand_obj', lazy=True)
-    predefined_devices = db.relationship('PredefinedDevice', backref='brand_obj', lazy=True)
     
     __table_args__ = (
         db.UniqueConstraint('name', 'device_type_id', name='_brand_device_type_uc'),

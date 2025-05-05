@@ -9,17 +9,13 @@ class Device(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     
-    # Replace string fields with foreign keys
+    # Foreign keys for relationships
     device_type_id = db.Column(db.Integer, db.ForeignKey('device_types.id'), nullable=False)
     brand_id = db.Column(db.Integer, db.ForeignKey('device_brands.id'), nullable=False)
     model = db.Column(db.String(100))
     
-    # Add image path for device display
+    # Device image
     image_path = db.Column(db.String(255))
-    
-    # Add predefined device support
-    is_predefined = db.Column(db.Boolean, default=False)
-    predefined_id = db.Column(db.Integer, db.ForeignKey('predefined_devices.id'), nullable=True)
     
     # Power consumption details
     power_consumption_watts = db.Column(db.Float, nullable=False)  # in watts
@@ -38,8 +34,8 @@ class Device(db.Model):
     
     # For EV charging
     is_ev_charger = db.Column(db.Boolean, default=False)
-    ev_battery_capacity_kwh = db.Column(db.Float)  # if it's an EV charger
-    charging_rate_kw = db.Column(db.Float)  # charging rate in kW
+    ev_battery_capacity_kwh = db.Column(db.Float)
+    charging_rate_kw = db.Column(db.Float)
     
     # Smart device integration
     is_smart_device = db.Column(db.Boolean, default=False)
@@ -52,7 +48,7 @@ class Device(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     
-    # Relationships
+    # Relationships (no backrefs because they're already in DeviceBrand and DeviceType)
     user = db.relationship('User', backref=db.backref('devices', lazy=True))
     usage_logs = db.relationship('DeviceUsageLog', backref='device', lazy=True)
     
@@ -76,7 +72,6 @@ class Device(db.Model):
             },
             'model': self.model,
             'image_path': self.image_path,
-            'is_predefined': self.is_predefined,
             'power_consumption_watts': self.power_consumption_watts,
             'standby_power_watts': self.standby_power_watts,
             'average_usage_hours_per_day': self.average_usage_hours_per_day,
