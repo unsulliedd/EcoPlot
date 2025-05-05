@@ -1,6 +1,6 @@
 # app/models/device.py
 from EcoPlot import db
-from datetime import datetime
+from datetime import datetime, timezone
 
 class Device(db.Model):
     __tablename__ = 'devices'
@@ -8,9 +8,18 @@ class Device(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
-    device_type = db.Column(db.String(50), nullable=False)
-    brand = db.Column(db.String(100))
+    
+    # Replace string fields with foreign keys
+    device_type_id = db.Column(db.Integer, db.ForeignKey('device_types.id'), nullable=False)
+    brand_id = db.Column(db.Integer, db.ForeignKey('device_brands.id'), nullable=False)
     model = db.Column(db.String(100))
+    
+    # Add image path for device display
+    image_path = db.Column(db.String(255))
+    
+    # Add predefined device support
+    is_predefined = db.Column(db.Boolean, default=False)
+    predefined_id = db.Column(db.Integer, db.ForeignKey('predefined_devices.id'), nullable=True)
     
     # Power consumption details
     power_consumption_watts = db.Column(db.Float, nullable=False)  # in watts
@@ -19,6 +28,7 @@ class Device(db.Model):
     # Usage patterns
     average_usage_hours_per_day = db.Column(db.Float)
     usage_flexibility = db.Column(db.Integer, default=0)  # 0-10 scale (0=inflexible, 10=very flexible)
+    priority_level = db.Column(db.Integer, default=5)  # 1-10 scale for optimization priority
     
     # For schedulable devices
     is_schedulable = db.Column(db.Boolean, default=False)
@@ -35,31 +45,48 @@ class Device(db.Model):
     is_smart_device = db.Column(db.Boolean, default=False)
     api_controllable = db.Column(db.Boolean, default=False)
     
+    # Status
+    is_active = db.Column(db.Boolean, default=True)
+    
     # Metadata
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     
     # Relationships
     user = db.relationship('User', backref=db.backref('devices', lazy=True))
     usage_logs = db.relationship('DeviceUsageLog', backref='device', lazy=True)
     
     def __repr__(self):
-        return f'<Device {self.name} ({self.device_type})>'
+        return f'<Device {self.name} ({self.device_type_obj.name})>'
     
     def to_dict(self):
         """Convert device object to dictionary for API responses"""
         return {
             'id': self.id,
             'name': self.name,
-            'device_type': self.device_type,
-            'brand': self.brand,
+            'device_type': {
+                'id': self.device_type_obj.id,
+                'name': self.device_type_obj.name,
+                'icon_path': self.device_type_obj.icon_path
+            },
+            'brand': {
+                'id': self.brand_obj.id,
+                'name': self.brand_obj.name,
+                'logo_path': self.brand_obj.logo_path
+            },
             'model': self.model,
+            'image_path': self.image_path,
+            'is_predefined': self.is_predefined,
             'power_consumption_watts': self.power_consumption_watts,
             'standby_power_watts': self.standby_power_watts,
             'average_usage_hours_per_day': self.average_usage_hours_per_day,
             'usage_flexibility': self.usage_flexibility,
+            'priority_level': self.priority_level,
             'is_schedulable': self.is_schedulable,
             'is_ev_charger': self.is_ev_charger,
             'is_smart_device': self.is_smart_device,
-            'api_controllable': self.api_controllable
+            'api_controllable': self.api_controllable,
+            'is_active': self.is_active,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat()
         }
