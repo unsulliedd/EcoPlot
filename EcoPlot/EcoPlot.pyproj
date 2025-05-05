@@ -28,38 +28,63 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="EcoPlot\config.py" />
     <Compile Include="EcoPlot\forms\auth.py" />
     <Compile Include="EcoPlot\forms\__init__.py" />
     <Compile Include="EcoPlot\models\device.py" />
+    <Compile Include="EcoPlot\models\device_brand.py" />
+    <Compile Include="EcoPlot\models\device_type.py" />
     <Compile Include="EcoPlot\models\device_usage.py" />
     <Compile Include="EcoPlot\models\user.py" />
     <Compile Include="EcoPlot\models\__init__.py" />
+    <Compile Include="EcoPlot\routes\admin_routes.py" />
     <Compile Include="EcoPlot\routes\auth.py" />
     <Compile Include="EcoPlot\routes\device_routes.py" />
     <Compile Include="EcoPlot\routes\main.py" />
     <Compile Include="EcoPlot\routes\__init__.py" />
+    <Compile Include="EcoPlot\seeds\seed_devices.py" />
+    <Compile Include="EcoPlot\seeds\__init__.py" />
+    <Compile Include="EcoPlot\services\device_service.py" />
+    <Compile Include="EcoPlot\services\__init__.py" />
     <Compile Include="runserver.py" />
     <Compile Include="EcoPlot\__init__.py" />
     <Compile Include="EcoPlot\views.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EcoPlot\" />
+    <Folder Include="EcoPlot\data\" />
     <Folder Include="EcoPlot\models\" />
     <Folder Include="EcoPlot\forms\" />
+    <Folder Include="EcoPlot\services\" />
+    <Folder Include="EcoPlot\seeds\" />
     <Folder Include="EcoPlot\routes\" />
     <Folder Include="EcoPlot\static\" />
     <Folder Include="EcoPlot\static\content\" />
     <Folder Include="EcoPlot\static\fonts\" />
+    <Folder Include="EcoPlot\static\js\" />
+    <Folder Include="EcoPlot\static\css\" />
     <Folder Include="EcoPlot\static\scripts\" />
     <Folder Include="EcoPlot\templates\" />
     <Folder Include="EcoPlot\templates\auth\" />
+    <Folder Include="EcoPlot\templates\devices\" />
+    <Folder Include="EcoPlot\templates\admin\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EcoPlot\data\ecoplot.db" />
+    <Content Include="EcoPlot\static\css\device.css" />
+    <Content Include="EcoPlot\static\js\admin.js" />
+    <Content Include="EcoPlot\static\css\admin.css" />
+    <Content Include="EcoPlot\static\js\device.js" />
+    <Content Include="EcoPlot\templates\admin\panel.html" />
     <Content Include="EcoPlot\templates\auth\login.html" />
     <Content Include="EcoPlot\templates\auth\register.html" />
+    <Content Include="EcoPlot\templates\devices\brands.html" />
+    <Content Include="EcoPlot\templates\devices\device_modals.html" />
+    <Content Include="EcoPlot\templates\devices\index.html" />
     <Content Include="EcoPlot\templates\layout.html" />
     <Content Include="EcoPlot\templates\dashboard.html" />
     <Content Include="EcoPlot\templates\index.html" />
+    <Content Include="EcoPlot\templates\devices\device_list.html" />
     <Content Include="EcoPlot\templates\profile.html" />
     <Content Include="requirements.txt" />
     <Content Include="EcoPlot\static\content\bootstrap.css" />

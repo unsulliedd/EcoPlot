@@ -27,11 +27,15 @@ def create_app(config_class=Config):
         return User.query.get(int(user_id))
     
     # Register blueprints
-    from EcoPlot.routes.auth import auth_bp
     from EcoPlot.routes.main import main_bp
+    from EcoPlot.routes.auth import auth_bp
+    from EcoPlot.routes.admin_routes import admin_bp
+    from EcoPlot.routes.device_routes import devices_bp
 
-    app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(devices_bp)
        
     # Create database tables
     with app.app_context():

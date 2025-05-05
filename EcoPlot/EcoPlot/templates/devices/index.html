@@ -1,0 +1,28 @@
+<!-- EcoPlot/templates/devices/index.html -->
+{% extends "layout.html" %}
+{% block title %}Device Categories{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/device.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Device Categories</h1>
+    <div class="row g-4">
+        {% for device_type in device_types %}
+        <div class="col-md-3 col-sm-6">
+            <a href="{{ url_for('devices.brands_by_type', type_id=device_type.id) }}" class="text-decoration-none text-dark">
+                <div class="card h-100 device-type-card">
+                    <div class="card-body text-center">
+                        <img src="{{ device_type.icon_path }}" alt="{{ device_type.name }}" class="device-icon mb-3">
+                        <h5 class="card-title">{{ device_type.name }}</h5>
+                        <p class="card-text text-muted">{{ device_type.description }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -36,7 +36,7 @@
                         <a class="nav-link" href="{{ url_for('main.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Devices</a>
+                        <a class="nav-link" href="{{ url_for('devices.index') }}">Devices</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Recommendations</a>
@@ -51,6 +51,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ url_for('main.profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('admin.admin_panel') }}">Admin Panel</a></li>                            
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
                         </ul>
