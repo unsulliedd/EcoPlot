@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 
 auth_bp = Blueprint('auth', __name__)
 
+# Login route
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -15,9 +16,14 @@ def login():
     
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        # Try to find a user by either username or email
+        user = User.query.filter(
+            (User.username == form.login.data) | 
+            (User.email == form.login.data)
+        ).first()
+        
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid email or password', 'danger')
+            flash('Invalid username/email or password', 'danger')
             return redirect(url_for('auth.login'))
         
         login_user(user, remember=form.remember_me.data)
@@ -28,11 +34,13 @@ def login():
     
     return render_template('auth/login.html', title='Sign In', form=form)
 
+# Logout route
 @auth_bp.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
 
+# Registration route
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
