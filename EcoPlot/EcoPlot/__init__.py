@@ -1,8 +1,9 @@
-# EcoPlot/__init__.py
-from flask import Flask, render_template, flash, redirect, url_for
+# EcoPlot/__init__.py - Add configuration classes
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, current_user, login_user, logout_user, login_required
-import os
+from flask_login import LoginManager
+from .config import Config
+from .seeds.seed_devices import seed_device_types_and_brands
 
 # Initialize extensions
 db = SQLAlchemy()
@@ -10,16 +11,11 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.login_message_category = 'info'
 
-def create_app():
+def create_app(config_class=Config):
     app = Flask(__name__)
+    app.config.from_object(config_class)
     
-    # Configure app
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-for-hackathon')
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'ecoplot.db')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    
-    # Initialize extensions with app
+    # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
     
@@ -33,15 +29,17 @@ def create_app():
     # Register blueprints
     from EcoPlot.routes.auth import auth_bp
     from EcoPlot.routes.main import main_bp
-    
+    from EcoPlot.routes.device_routes import device_bp
+
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp)
-    
+    app.register_blueprint(device_bp)
+       
     # Create database tables
     with app.app_context():
         db.create_all()
+        # seed_device_types_and_brands # Uncomment this line to seed device types and brands
     
     return app
-
 # Create an app instance
 app = create_app()
