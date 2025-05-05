@@ -1,9 +1,11 @@
 // EcoPlot/static/js/device.js
 
 const DeviceManager = {
-    showAddModal: function (deviceType, brandId) {
+    showAddModal: function (deviceTypeId, brandId) {
         const modal = new bootstrap.Modal(document.getElementById('addDeviceModal'));
-        document.getElementById('device_type_id').value = deviceType;
+
+        // Set hidden fields with the selected device type and brand
+        document.getElementById('device_type_id').value = deviceTypeId;
         document.getElementById('brand_id').value = brandId;
 
         // Reset form

@@ -16,6 +16,18 @@
                     <div class="device-form-section">
                         <h6>Basic Information</h6>
 
+                        <!-- Display selected device type and brand (read-only) -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Device Type</label>
+                                <input type="text" class="form-control" value="{{ device_type.name }}" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Brand</label>
+                                <input type="text" class="form-control" value="{{ brand.name }}" disabled>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
                             <label for="name" class="form-label">Device Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="name" name="name" required>
