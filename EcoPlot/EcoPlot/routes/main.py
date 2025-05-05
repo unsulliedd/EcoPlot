@@ -162,3 +162,8 @@ def profile():
                           is_first_visit=is_first_visit,
                           profile_data=current_user)
 
+@main_bp.route('/recommendations')
+@login_required
+def recommendations():
+    return render_template('recommendations.html')
+

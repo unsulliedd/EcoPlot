@@ -36,6 +36,7 @@
     <Compile Include="EcoPlot\models\device_brand.py" />
     <Compile Include="EcoPlot\models\device_type.py" />
     <Compile Include="EcoPlot\models\device_usage.py" />
+    <Compile Include="EcoPlot\models\recommendation.py" />
     <Compile Include="EcoPlot\models\user.py" />
     <Compile Include="EcoPlot\models\__init__.py" />
     <Compile Include="EcoPlot\routes\admin_routes.py" />
@@ -78,10 +79,12 @@
     <Content Include="EcoPlot\data\ecoplot.db" />
     <Content Include="EcoPlot\static\css\device.css" />
     <Content Include="EcoPlot\static\css\profile.css" />
+    <Content Include="EcoPlot\static\css\recommendations.css" />
     <Content Include="EcoPlot\static\js\admin.js" />
     <Content Include="EcoPlot\static\css\admin.css" />
     <Content Include="EcoPlot\static\js\device.js" />
     <Content Include="EcoPlot\static\js\profile.js" />
+    <Content Include="EcoPlot\static\js\recommendations.js" />
     <Content Include="EcoPlot\templates\admin\panel.html" />
     <Content Include="EcoPlot\templates\auth\login.html" />
     <Content Include="EcoPlot\templates\auth\register.html" />

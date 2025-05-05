@@ -16,4 +16,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
     # Gemini API config
-    GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+    GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY') or 'API_KEY_HERE'
