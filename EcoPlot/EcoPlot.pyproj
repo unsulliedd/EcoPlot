@@ -63,6 +63,8 @@
     <Folder Include="EcoPlot\static\fonts\" />
     <Folder Include="EcoPlot\static\js\" />
     <Folder Include="EcoPlot\static\css\" />
+    <Folder Include="EcoPlot\static\icons\" />
+    <Folder Include="EcoPlot\static\logos\" />
     <Folder Include="EcoPlot\static\scripts\" />
     <Folder Include="EcoPlot\templates\" />
     <Folder Include="EcoPlot\templates\auth\" />
