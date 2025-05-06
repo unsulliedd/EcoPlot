@@ -14,16 +14,26 @@
             <li class="breadcrumb-item active">{{ device_type.name }}</li>
         </ol>
     </nav>
-    <h1 class="mb-4">{{ device_type.name }} Brands</h1>
+
+    <div class="d-flex align-items-center mb-4">
+        <img src="{{ device_type.icon_path }}" alt="{{ device_type.name }}" class="me-3" style="width: 48px; height: 48px;">
+        <h1 class="mb-0">{{ device_type.name }} Brands</h1>
+    </div>
+
     <div class="row g-4">
         {% for brand in brands %}
         <div class="col-md-3 col-sm-6">
             <a href="{{ url_for('devices.devices_by_brand', type_id=device_type.id, brand_id=brand.id) }}"
                class="text-decoration-none text-dark">
                 <div class="card h-100 brand-card">
-                    <div class="card-body text-center">
-                        <img src="{{ brand.logo_path }}" alt="{{ brand.name }}" class="brand-logo mb-3">
-                        <h5 class="card-title">{{ brand.name }}</h5>
+                    <div class="brand-logo-container">
+                        {% if brand.logo_path and brand.logo_path != "/static/logos/other.png" %}
+                        <img src="{{ brand.logo_path }}" alt="{{ brand.name }}" class="brand-logo"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="brand-name-fallback" style="display:none;">{{ brand.name }}</div>
+                        {% else %}
+                        <div class="brand-name-fallback">{{ brand.name }}</div>
+                        {% endif %}
                     </div>
                 </div>
             </a>
@@ -31,4 +41,8 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/device.js') }}"></script>
 {% endblock %}

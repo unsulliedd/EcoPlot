@@ -3,6 +3,11 @@
 
 {% block title %}EcoPlot - {{ brand.name }} {{ device_type.name }}{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/device.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
 {% block content %}
 <div class="container mt-4">
     <!-- Breadcrumb -->
@@ -14,47 +19,69 @@
         </ol>
     </nav>
 
-    <div class="row mb-4">
-        <div class="col-md-8">
-            <h1>{{ brand.name }} {{ device_type.name }}</h1>
-            <p class="lead">Manage your {{ brand.name }} {{ device_type.name|lower }} devices.</p>
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="d-flex align-items-center">
+            <img src="{{ brand.logo_path }}" alt="{{ brand.name }}" class="me-3" style="max-width: 60px; max-height: 40px;">
+            <h1 class="mb-0">{{ brand.name }} {{ device_type.name }}</h1>
         </div>
-        <div class="col-md-4 text-end">
-            <button class="btn btn-success btn-lg" onclick="DeviceManager.showAddModal('{{ device_type.id }}', '{{ brand.id }}')">
-                <i class="fas fa-plus me-2"></i> Add New Device
-            </button>
-        </div>
+        <button class="btn btn-success" onclick="DeviceManager.showAddModal('{{ device_type.id }}', '{{ brand.id }}')">
+            <i class="fas fa-plus me-2"></i> Add New Device
+        </button>
     </div>
 
     <!-- Device List -->
     <div class="row" id="deviceList">
         {% if user_devices %}
         {% for device in user_devices %}
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
+        <div class="col-md-4 mb-4">
+            <div class="card device-list-card shadow-sm h-100">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">{{ device.name }}</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" onclick="DeviceManager.editDevice({{ device.id }})"><i class="fas fa-edit me-2"></i> Edit</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="DeviceManager.deleteDevice({{ device.id }})"><i class="fas fa-trash me-2"></i> Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ device.name }}</h5>
-                    <p class="card-text">
-                        <strong>Model:</strong> {{ device.model or 'N/A' }}<br>
-                        <strong>Power:</strong> {{ device.power_consumption_watts or 0 }} W<br>
-                        <strong>Standby:</strong> {{ device.standby_power_watts or 0 }} W<br>
+                    <div class="row detail-row">
+                        <div class="col-5 detail-label">Model:</div>
+                        <div class="col-7">{{ device.model or 'N/A' }}</div>
+                    </div>
+                    <div class="row detail-row">
+                        <div class="col-5 detail-label">Power:</div>
+                        <div class="col-7">{{ device.power_consumption_watts or 0 }} W</div>
+                    </div>
+                    <div class="row detail-row">
+                        <div class="col-5 detail-label">Standby:</div>
+                        <div class="col-7">{{ device.standby_power_watts or 0 }} W</div>
+                    </div>
+                    {% if device.average_usage_hours_per_day %}
+                    <div class="row detail-row">
+                        <div class="col-5 detail-label">Daily Usage:</div>
+                        <div class="col-7">{{ device.average_usage_hours_per_day }} hours</div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white">
+                    <div>
                         {% if device.is_smart_device %}
-                        <span class="badge bg-primary">Smart Device</span>
+                        <span class="badge bg-primary device-badge"><i class="fas fa-wifi me-1"></i> Smart</span>
                         {% endif %}
                         {% if device.is_ev_charger %}
-                        <span class="badge bg-success">EV Charger</span>
+                        <span class="badge bg-success device-badge"><i class="fas fa-plug me-1"></i> EV Charger</span>
                         {% endif %}
                         {% if device.is_schedulable %}
-                        <span class="badge bg-info">Schedulable</span>
+                        <span class="badge bg-info device-badge"><i class="fas fa-clock me-1"></i> Schedulable</span>
                         {% endif %}
-                    </p>
-                    <div class="btn-group" role="group">
-                        <button class="btn btn-outline-primary btn-sm" onclick="DeviceManager.editDevice({{ device.id }})">
-                            <i class="fas fa-edit me-1"></i> Edit
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm" onclick="DeviceManager.deleteDevice({{ device.id }})">
-                            <i class="fas fa-trash me-1"></i> Delete
-                        </button>
+                        {% if device.api_controllable %}
+                        <span class="badge bg-warning text-dark device-badge"><i class="fas fa-code me-1"></i> API</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -63,8 +90,13 @@
         {% else %}
         <div class="col-12">
             <div class="alert alert-info">
-                <h4>No devices found</h4>
-                <p>You haven't added any {{ brand.name }} {{ device_type.name|lower }} devices yet. Click the button above to add your first device.</p>
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-info-circle fa-2x me-3"></i>
+                    <div>
+                        <h5 class="mb-1">No devices found</h5>
+                        <p class="mb-0">You haven't added any {{ brand.name }} {{ device_type.name|lower }} devices yet. Click the "Add New Device" button to get started.</p>
+                    </div>
+                </div>
             </div>
         </div>
         {% endif %}

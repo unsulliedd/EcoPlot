@@ -12,12 +12,12 @@
     <div class="row g-4">
         {% for device_type in device_types %}
         <div class="col-md-3 col-sm-6">
-            <a href="{{ url_for('devices.brands_by_type', type_id=device_type.id) }}" class="text-decoration-none text-dark">
-                <div class="card h-100 device-type-card">
-                    <div class="card-body text-center">
-                        <img src="{{ device_type.icon_path }}" alt="{{ device_type.name }}" class="device-icon mb-3">
+            <a href="{{ url_for('devices.brands_by_type', type_id=device_type.id) }}" class="text-decoration-none">
+                <div class="card device-type-card device-type-{{ device_type.name|lower|replace(' ', '-') }}">
+                    <img src="{{ device_type.icon_path }}" class="card-img" alt="{{ device_type.name }}">
+                    <div class="card-img-overlay">
                         <h5 class="card-title">{{ device_type.name }}</h5>
-                        <p class="card-text text-muted">{{ device_type.description }}</p>
+                        <p class="card-text">{{ device_type.description }}</p>
                     </div>
                 </div>
             </a>
@@ -25,4 +25,8 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/device.js') }}"></script>
 {% endblock %}
