@@ -116,6 +116,7 @@
     <Content Include="EcoPlot\static\logos\samsung.png" />
     <Content Include="EcoPlot\static\logos\whirlpool.png" />
     <Content Include="EcoPlot\templates\admin\panel.html" />
+    <Content Include="EcoPlot\templates\auth\change_password.html" />
     <Content Include="EcoPlot\templates\auth\login.html" />
     <Content Include="EcoPlot\templates\auth\register.html" />
     <Content Include="EcoPlot\templates\devices\brands.html" />
