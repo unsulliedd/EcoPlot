@@ -1,196 +1,279 @@
-/* EcoPlot/static/css/device.css */
+/* Dropdown menu styling for device cards */
+body.dark-mode .dropdown-menu {
+    background-color: #343a40;
+    border-color: rgba(255,255,255,0.15);
+}
 
-/* Device Type Cards */
+body.dark-mode .dropdown-item {
+    color: #f8f9fa;
+}
+
+    body.dark-mode .dropdown-item:hover,
+    body.dark-mode .dropdown-item:focus {
+        background-color: rgba(255,255,255,0.1);
+        color: #ffffff;
+    }
+
+body.dark-mode .dropdown-divider {
+    border-top-color: rgba(255,255,255,0.15);
+}
+
+body.dark-mode .text-danger {
+    color: #ff6b6b !important; /* Brighter red for better visibility in dark mode */
+}
+/* EcoPlot/static/css/device.css */
+/* Device Type Cards on Index Page */
 .device-type-card {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
     border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    height: 180px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     border: none;
 }
 
     .device-type-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .device-type-card .card-img-overlay {
-        background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 1.5rem;
-    }
-
-    .device-type-card .card-title {
-        color: white;
-        font-weight: bold;
-        font-size: 1.4rem;
-        margin-bottom: 0.25rem;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-    }
-
-    .device-type-card .card-text {
-        color: rgba(255,255,255,0.9);
-        font-size: 0.9rem;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     }
 
     .device-type-card .card-img {
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s ease;
+        filter: brightness(0.7);
+        transition: filter 0.3s;
     }
 
     .device-type-card:hover .card-img {
-        transform: scale(1.05);
+        filter: brightness(0.9);
+    }
+
+    .device-type-card .card-img-overlay {
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.25rem;
+    }
+
+    .device-type-card .card-title {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .device-type-card .card-text {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.875rem;
+        margin-bottom: 0;
+    }
+
+body.dark-mode .device-type-card {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+    body.dark-mode .device-type-card:hover {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     }
 
 /* Brand Cards */
 .brand-card {
-    padding: 1.5rem;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s, box-shadow 0.3s;
     border-radius: 10px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border: none;
 }
 
     .brand-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        background-color: #f8f9fa;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+body.dark-mode .brand-card {
+    background-color: #3a4046;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+    body.dark-mode .brand-card:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
 
 .brand-logo-container {
-    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    height: 120px;
+    padding: 1.5rem;
 }
 
 .brand-logo {
-    max-width: 140px;
-    max-height: 80px;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.brand-card:hover .brand-logo {
-    transform: scale(1.1);
 }
 
 .brand-name-fallback {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #28a745;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-weight: 600;
+    font-size: 1.2rem;
     text-align: center;
+    color: #333;
+}
+
+body.dark-mode .brand-name-fallback {
+    color: #f8f9fa;
 }
 
 /* Device List Cards */
 .device-list-card {
+    transition: transform 0.3s, box-shadow 0.3s;
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
     .device-list-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
     }
 
-.device-badge {
-    margin-right: 5px;
-    margin-bottom: 5px;
+body.dark-mode .device-list-card {
+    background-color: #3a4046;
+    border-color: rgba(255,255,255,0.1);
+    color: #f8f9fa; /* Make sure text is light colored in dark mode */
 }
 
-/* Device Details */
+    body.dark-mode .device-list-card:hover {
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
+    }
+
+    body.dark-mode .device-list-card .card-header {
+        background-color: #2b3035 !important;
+        border-bottom-color: rgba(255,255,255,0.1);
+        color: #f8f9fa; /* Ensure header text is visible */
+    }
+
+    body.dark-mode .device-list-card .card-footer {
+        background-color: #2b3035 !important;
+        border-top-color: rgba(255,255,255,0.1);
+    }
+
+    body.dark-mode .device-list-card .card-body {
+        color: #f8f9fa; /* Ensure body text is light colored */
+    }
+
+.device-list-card .card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
 .detail-row {
     margin-bottom: 0.5rem;
 }
 
 .detail-label {
-    font-weight: bold;
+    font-weight: 500;
     color: #6c757d;
 }
 
-/* Modal Styles */
+body.dark-mode .detail-label {
+    color: #cbd3da; /* Lighter color for better visibility in dark mode */
+}
+
+/* Add styling for detail value */
+.detail-row .col-7 {
+    color: #212529;
+}
+
+body.dark-mode .detail-row .col-7 {
+    color: #f8f9fa; /* Ensure the value text is white in dark mode */
+}
+
+.device-badge {
+    margin-right: 0.5rem;
+    padding: 0.35rem 0.65rem;
+}
+
+/* Device Form Styling */
 .device-form-section {
     margin-bottom: 2rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid #e9ecef;
 }
 
-    .device-form-section:last-child {
-        border-bottom: none;
+body.dark-mode .device-form-section {
+    border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.device-form-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.device-form-section h6 {
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: #495057;
+}
+
+body.dark-mode .device-form-section h6 {
+    color: #e9ecef;
+}
+
+/* Modal Styling for Dark Mode */
+body.dark-mode .modal-content {
+    background-color: #343a40;
+    border-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .modal-header {
+    border-bottom-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .modal-footer {
+    border-top-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Form Check in Dark Mode */
+body.dark-mode .form-check-input {
+    background-color: #495057;
+    border-color: rgba(255,255,255,0.2);
+}
+
+    body.dark-mode .form-check-input:checked {
+        background-color: #28a745;
+        border-color: #28a745;
     }
 
-.section-title {
-    color: #28a745;
-    margin-bottom: 1rem;
+/* Breadcrumb in Dark Mode */
+body.dark-mode .breadcrumb {
+    background-color: transparent;
 }
 
-.detail-section {
-    display: none;
+body.dark-mode .breadcrumb-item a {
+    color: #8ab4f8;
 }
 
-/* Device Type Colors & Images for background cards */
-.device-type-refrigerator {
-    background-color: #daedf6;
+body.dark-mode .breadcrumb-item.active {
+    color: #adb5bd;
 }
 
-.device-type-dishwasher {
-    background-color: #e6f7ef;
-}
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+    .device-type-card {
+        height: 150px;
+    }
 
-.device-type-washing-machine {
-    background-color: #e8eaf6;
-}
-
-.device-type-dryer {
-    background-color: #fdf5e6;
-}
-
-.device-type-hvac {
-    background-color: #f5f5f5;
-}
-
-.device-type-water-heater {
-    background-color: #e3f2fd;
-}
-
-.device-type-ev-charger {
-    background-color: #e8f5e9;
-}
-
-.device-type-lighting {
-    background-color: #fffde7;
-}
-
-.device-type-television {
-    background-color: #f9ebea;
-}
-
-.device-type-computer {
-    background-color: #e8eaf6;
-}
-
-.device-type-small-kitchen-appliance {
-    background-color: #fff3e0;
-}
-
-.device-type-smart-speaker {
-    background-color: #f3e5f5;
-}
-
-.device-type-pool-pump {
-    background-color: #e1f5fe;
-}
-
-.device-type-other {
-    background-color: #eceff1;
+    .brand-logo-container {
+        height: 100px;
+    }
 }

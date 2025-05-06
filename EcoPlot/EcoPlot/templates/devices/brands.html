@@ -24,7 +24,7 @@
         {% for brand in brands %}
         <div class="col-md-3 col-sm-6">
             <a href="{{ url_for('devices.devices_by_brand', type_id=device_type.id, brand_id=brand.id) }}"
-               class="text-decoration-none text-dark">
+               class="text-decoration-none">
                 <div class="card h-100 brand-card">
                     <div class="brand-logo-container">
                         {% if brand.logo_path and brand.logo_path != "/static/logos/other.png" %}

@@ -1,0 +1,278 @@
+/* EcoPlot/static/css/theme.css */
+:root {
+    --primary-color: #28a745;
+    --primary-hover: #218838;
+    --secondary-color: #6c757d;
+    --light-bg: #ffffff;
+    --dark-bg: #212529;
+    --light-text: #212529;
+    --dark-text: #f8f9fa;
+    --light-card-bg: #ffffff;
+    --dark-card-bg: #767676;
+    --light-card-border: rgba(0,0,0,0.125);
+    --dark-card-border: rgba(255,255,255,0.1);
+    --light-input-bg: #ffffff;
+    --dark-input-bg: #2b3035;
+    --light-input-border: #ced4da;
+    --dark-input-border: #495057;
+    --light-nav-bg: #f8f9fa;
+    --dark-nav-bg: #343a40;
+    --light-footer-bg: #f8f9fa;
+    --dark-footer-bg: #343a40;
+    --light-hover: rgba(0,0,0,0.05);
+    --dark-hover: rgba(255,255,255,0.05);
+    --transition-speed: 0.3s;
+}
+
+body {
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    background-color: var(--light-bg);
+    color: var(--light-text);
+}
+
+    body.dark-mode {
+        background-color: var(--dark-bg);
+        color: var(--dark-text);
+    }
+
+/* Navbar styling */
+.navbar {
+    transition: background-color var(--transition-speed);
+    background-color: var(--light-nav-bg);
+}
+
+body.dark-mode .navbar {
+    background-color: var(--dark-nav-bg);
+}
+
+body.dark-mode .navbar-light .navbar-brand,
+body.dark-mode .navbar-light .navbar-nav .nav-link {
+    color: var(--dark-text);
+}
+
+body.dark-mode .navbar-light .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Card styling */
+.card {
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    background-color: var(--light-card-bg);
+    border-color: var(--light-card-border);
+}
+
+body.dark-mode .card {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-card-border);
+}
+
+body.dark-mode .card-header {
+    border-bottom-color: var(--dark-card-border);
+}
+
+body.dark-mode .card-footer {
+    border-top-color: var(--dark-card-border);
+}
+
+/* Form styling */
+.form-control, .form-select {
+    transition: background-color var(--transition-speed), border-color var(--transition-speed), color var(--transition-speed);
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background-color: var(--dark-input-bg);
+    border-color: var(--dark-input-border);
+    color: var(--dark-text);
+}
+
+    body.dark-mode .form-control:focus,
+    body.dark-mode .form-select:focus {
+        background-color: var(--dark-input-bg);
+        color: var(--dark-text);
+    }
+
+    body.dark-mode .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+body.dark-mode .form-label {
+    color: var(--dark-text);
+}
+
+/* Table styling */
+body.dark-mode .table {
+    color: var(--dark-text);
+}
+
+    body.dark-mode .table td,
+    body.dark-mode .table th {
+        border-color: var(--dark-input-border);
+    }
+
+body.dark-mode .table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Footer styling */
+footer {
+    transition: background-color var(--transition-speed);
+    background-color: var(--light-footer-bg);
+}
+
+body.dark-mode footer {
+    background-color: var(--dark-footer-bg);
+    color: var(--dark-text);
+}
+
+/* Alert and message styling */
+body.dark-mode .alert-info {
+    background-color: #17294d;
+    border-color: #1c3a6e;
+    color: #8bb9ff;
+}
+
+body.dark-mode .alert-danger {
+    background-color: #4d1f24;
+    border-color: #6e2935;
+    color: #ff8b9d;
+}
+
+body.dark-mode .alert-success {
+    background-color: #1e4620;
+    border-color: #2a6e30;
+    color: #8bff95;
+}
+
+body.dark-mode .alert-warning {
+    background-color: #4d4320;
+    border-color: #6e612d;
+    color: #ffdb8b;
+}
+
+/* List groups styling */
+body.dark-mode .list-group-item {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-card-border);
+    color: var(--dark-text);
+}
+
+/* Dropdown menu styling */
+body.dark-mode .dropdown-menu {
+    background-color: #343a40;
+    border-color: rgba(255,255,255,0.15);
+}
+
+body.dark-mode .dropdown-item {
+    color: #f8f9fa;
+}
+
+    body.dark-mode .dropdown-item:hover,
+    body.dark-mode .dropdown-item:focus {
+        background-color: rgba(255,255,255,0.1);
+        color: #ffffff;
+    }
+
+    body.dark-mode .dropdown-item.active {
+        background-color: var(--primary-color);
+        color: #ffffff;
+    }
+
+body.dark-mode .dropdown-divider {
+    border-top-color: rgba(255,255,255,0.15);
+}
+
+body.dark-mode .dropdown-item.text-danger {
+    color: #ff6b6b !important;
+}
+
+    body.dark-mode .dropdown-item.text-danger:hover,
+    body.dark-mode .dropdown-item.text-danger:focus {
+        background-color: rgba(255,0,0,0.1);
+    }
+
+/* Theme toggle switch styling */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+    .theme-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.slider .light-icon,
+.slider .dark-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: opacity 0.2s ease;
+}
+
+.slider .light-icon {
+    right: 7px;
+    opacity: 1;
+}
+
+.slider .dark-icon {
+    left: 7px;
+    opacity: 0;
+    color: white;
+}
+
+input:checked + .slider .light-icon {
+    opacity: 0;
+}
+
+input:checked + .slider .dark-icon {
+    opacity: 1;
+}

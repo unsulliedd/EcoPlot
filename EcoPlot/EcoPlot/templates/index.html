@@ -1,56 +1,223 @@
 <!-- EcoPlot/templates/index.html -->
 {% extends "layout.html" %}
 
-{% block title %}EcoPlot - Home{% endblock %}
+{% block title %}EcoPlot - Smart Energy Optimization{% endblock %}
+
+{% block extra_css %}
+<link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-<section class="py-5 text-center">
+<!-- Hero Section -->
+<section class="hero-section">
     <div class="container">
-        <h1>Welcome to <span class="eco-green">Eco</span>Plot</h1>
-        <p class="lead">Optimize your energy consumption with renewable energy and electric vehicles</p>
-
-        {% if not current_user.is_authenticated %}
-        <div class="mt-4">
-            <a href="{{ url_for('auth.register') }}" class="btn btn-success btn-lg mx-2">Get Started</a>
-            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-success btn-lg mx-2">Sign In</a>
+        <div class="hero-content">
+            <h1 class="display-4 fw-bold animate-fade-in-up">Welcome to <span class="eco-green">Eco</span>Plot</h1>
+            <p class="hero-tagline animate-fade-in-up delay-1">
+                Optimize your energy consumption, save money, and reduce your carbon footprint with AI-powered recommendations
+            </p>
+            <div class="hero-cta animate-fade-in-up delay-2">
+                {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('auth.register') }}" class="btn btn-success btn-lg mx-2">Get Started</a>
+                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-light btn-lg mx-2">Sign In</a>
+                {% else %}
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-success btn-lg">Go to Dashboard</a>
+                {% endif %}
+            </div>
         </div>
-        {% else %}
-        <div class="mt-4">
-            <a href="{{ url_for('main.dashboard') }}" class="btn btn-success btn-lg">Go to Dashboard</a>
-        </div>
-        {% endif %}
     </div>
 </section>
 
-<section class="py-5 bg-light">
+<!-- Features Section -->
+<section class="features-section">
     <div class="container">
-        <h2 class="text-center mb-4">How It Works</h2>
+        <div class="section-title">
+            <h2>Smart Energy Management</h2>
+            <p class="text-muted">EcoPlot helps you take control of your energy usage</p>
+        </div>
+
         <div class="row">
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h3 class="h5 mb-3">Add Your Devices</h3>
-                        <p>Enter your home appliances, EV charger, and other devices</p>
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card text-center">
+                    <div class="feature-icon">
+                        <i class="bi bi-lightning-fill"></i>
+                    </div>
+                    <h3>Optimize Usage</h3>
+                    <p>Get personalized recommendations to reduce energy consumption based on your specific devices and habits.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card text-center">
+                    <div class="feature-icon">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <h3>Save Money</h3>
+                    <p>Cut your utility bills by optimizing when and how you use electricity based on time-of-use rates.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card feature-card text-center">
+                    <div class="feature-icon">
+                        <i class="bi bi-tree-fill"></i>
+                    </div>
+                    <h3>Go Green</h3>
+                    <p>Reduce your carbon footprint by aligning your energy usage with renewable sources like solar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works">
+    <div class="container">
+        <div class="section-title">
+            <h2>How EcoPlot Works</h2>
+            <p class="text-muted">Simple steps to optimize your energy consumption</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Add Your Devices</h3>
+                    <p>Input your home appliances, EV charger, solar panels, and other energy-consuming devices</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Create Energy Profile</h3>
+                    <p>Tell us about your energy usage patterns, utility rates, and energy production</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get Smart Recommendations</h3>
+                    <p>Receive AI-powered suggestions to optimize your energy usage and save money</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <div class="stat-item">
+                    <div class="stat-number">25%</div>
+                    <div class="stat-label">Average Energy Savings</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="stat-item">
+                    <div class="stat-number">$485</div>
+                    <div class="stat-label">Avg. Annual Savings</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="stat-item">
+                    <div class="stat-number">1,200+</div>
+                    <div class="stat-label">Devices Supported</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <div class="stat-item">
+                    <div class="stat-number">30%</div>
+                    <div class="stat-label">Carbon Footprint Reduction</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="benefits-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Benefits of Using EcoPlot</h2>
+            <p class="text-muted">Smart energy management for everyone</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Optimal Scheduling</h4>
+                        <p>Schedule energy-intensive tasks during off-peak hours or when renewable energy production is high.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="bi bi-lightning-charge"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Real-time Monitoring</h4>
+                        <p>Track your energy consumption patterns and see where you can make improvements.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h3 class="h5 mb-3">Energy Profile</h3>
-                        <p>Tell us about your solar panels and energy usage patterns</p>
+
+            <div class="col-lg-6">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="bi bi-ev-station"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>EV Charging Optimization</h4>
+                        <p>Smart charging schedules for your electric vehicle to minimize costs and carbon impact.</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h3 class="h5 mb-3">Get Recommendations</h3>
-                        <p>Receive AI-powered suggestions to optimize your energy usage</p>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>Analytical Insights</h4>
+                        <p>Detailed analytics on your energy usage patterns to help you make informed decisions.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Call to Action Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Optimize Your Energy?</h2>
+            <p class="cta-subtitle">Join thousands of users who are saving money and reducing their environmental impact with EcoPlot.</p>
+
+            <div class="cta-buttons">
+                {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('auth.register') }}" class="btn btn-light btn-lg">Create Account</a>
+                <a href="#" class="btn btn-outline-light btn-lg">Learn More</a>
+                {% else %}
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-light btn-lg">Go to Dashboard</a>
+                <a href="{{ url_for('devices.index') }}" class="btn btn-outline-light btn-lg">Manage Devices</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}

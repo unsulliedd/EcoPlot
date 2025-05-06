@@ -1,15 +1,23 @@
 /* EcoPlot/static/css/dashboard.css */
-
 /* Dashboard Summary Cards */
 .summary-card {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 20px;
 }
 
     .summary-card:hover {
         transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+body.dark-mode .summary-card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+    body.dark-mode .summary-card:hover {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
     }
 
 .summary-icon {
@@ -35,13 +43,29 @@
     font-size: 14px;
 }
 
-    .summary-change .fa-arrow-up {
-        color: #28a745;
-    }
+body.dark-mode .summary-change {
+    color: #adb5bd;
+}
 
-    .summary-change .fa-arrow-down {
-        color: #dc3545;
-    }
+.summary-change .fa-arrow-up,
+.summary-change .bi-arrow-up {
+    color: #28a745;
+}
+
+.summary-change .fa-arrow-down,
+.summary-change .bi-arrow-down {
+    color: #dc3545;
+}
+
+body.dark-mode .summary-change .fa-arrow-up,
+body.dark-mode .summary-change .bi-arrow-up {
+    color: #4ade80;
+}
+
+body.dark-mode .summary-change .fa-arrow-down,
+body.dark-mode .summary-change .bi-arrow-down {
+    color: #f87171;
+}
 
 /* Charts */
 .chart-container {
@@ -58,10 +82,19 @@
     border: none;
 }
 
+body.dark-mode .card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+}
+
 .card-header {
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     padding: 1rem 1.25rem;
+}
+
+body.dark-mode .card-header {
+    background-color: #2b3035;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .card-title {
@@ -69,10 +102,15 @@
     font-weight: 600;
 }
 
+body.dark-mode .card-title {
+    color: #f8f9fa;
+}
+
 /* Device list */
 .device-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid #e9ecef;
 }
@@ -80,6 +118,10 @@
     .device-item:last-child {
         border-bottom: none;
     }
+
+body.dark-mode .device-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
 
 .device-icon {
     width: 40px;
@@ -94,24 +136,52 @@
     font-size: 18px;
 }
 
+body.dark-mode .device-icon {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
 .device-info {
     flex-grow: 1;
 }
 
-.device-name {
-    font-weight: 600;
-    margin-bottom: 2px;
-    color: #212529;
+    .device-info h6 {
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+    }
+
+body.dark-mode .device-info h6 {
+    color: #f8f9fa;
 }
 
-.device-type {
-    font-size: 12px;
-    color: #6c757d;
+.device-info p {
+    margin-bottom: 0;
+}
+
+body.dark-mode .device-info p.text-muted {
+    color: #adb5bd !important;
 }
 
 .device-usage {
+    text-align: right;
+}
+
+.device-power {
     font-weight: 600;
     color: #495057;
+}
+
+.device-daily {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+body.dark-mode .device-power {
+    color: #f8f9fa;
+}
+
+body.dark-mode .device-daily {
+    color: #adb5bd;
 }
 
 .device-progress {
@@ -120,26 +190,48 @@
     background-color: #e9ecef;
 }
 
+body.dark-mode .device-progress {
+    background-color: #343a40;
+}
+
 /* Recommendations */
 .recommendation-item {
     padding: 15px 0;
     border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
     .recommendation-item:last-child {
         border-bottom: none;
     }
 
+body.dark-mode .recommendation-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
 .recommendation-content {
     font-size: 14px;
     color: #212529;
     margin-bottom: 5px;
+    flex-grow: 1;
+}
+
+    .recommendation-content p {
+        margin-bottom: 0;
+    }
+
+body.dark-mode .recommendation-content {
+    color: #f8f9fa;
 }
 
 .recommendation-saving {
-    font-size: 12px;
-    color: #28a745;
-    font-weight: 600;
+    padding-left: 10px;
+}
+
+body.dark-mode .badge.bg-success {
+    background-color: #2da44e !important;
 }
 
 /* Optimal Usage Times */
@@ -156,6 +248,10 @@
         border-bottom: none;
     }
 
+body.dark-mode .optimal-time-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
 .optimal-time-period {
     font-weight: 600;
     margin-bottom: 5px;
@@ -169,14 +265,61 @@
     color: #dc3545;
 }
 
+body.dark-mode .optimal-time-good {
+    color: #4ade80;
+}
+
+body.dark-mode .optimal-time-avoid {
+    color: #f87171;
+}
+
 .optimal-time-desc {
     font-size: 12px;
     color: #6c757d;
 }
 
+body.dark-mode .optimal-time-desc {
+    color: #adb5bd;
+}
+
 /* Dashboard Header */
 .dashboard-header {
     margin-bottom: 2rem;
+}
+
+/* Button group styling */
+.btn-group .btn-outline-success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+    .btn-group .btn-outline-success:hover,
+    .btn-group .btn-outline-success.active {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+    }
+
+body.dark-mode .btn-group .btn-outline-success {
+    color: #4ade80;
+    border-color: #4ade80;
+}
+
+    body.dark-mode .btn-group .btn-outline-success:hover,
+    body.dark-mode .btn-group .btn-outline-success.active {
+        background-color: #2da44e;
+        border-color: #2da44e;
+        color: white;
+    }
+
+/* Chart.js Dark Mode Customization */
+body.dark-mode .chart-container canvas {
+    filter: brightness(0.8) contrast(1.2);
+}
+
+/* Spinner in dark mode */
+body.dark-mode .spinner-border.text-success {
+    color: #4ade80 !important;
 }
 
 /* Responsive adjustments */

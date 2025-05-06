@@ -11,9 +11,18 @@
     color: #28a745;
 }
 
+body.dark-mode .section-title {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    color: #4ade80; /* Lighter green for dark mode */
+}
+
 .optional-section {
     padding-top: 15px;
     border-top: 1px dashed #eee;
+}
+
+body.dark-mode .optional-section {
+    border-top-color: rgba(255, 255, 255, 0.1);
 }
 
 .welcome-banner {
@@ -24,12 +33,22 @@
     border-radius: 4px;
 }
 
+body.dark-mode .welcome-banner {
+    background-color: #2b3035;
+    border-left-color: #4ade80;
+}
+
 .detail-section {
     background-color: #f9f9f9;
     padding: 15px;
     border-radius: 5px;
     margin-top: 10px;
     border-left: 3px solid #28a745;
+}
+
+body.dark-mode .detail-section {
+    background-color: #3a4046;
+    border-left-color: #4ade80;
 }
 
 .card {
@@ -42,6 +61,14 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
+body.dark-mode .card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+    body.dark-mode .card:hover {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
 .card-header {
     font-weight: bold;
 }
@@ -50,9 +77,17 @@
     font-weight: 500;
 }
 
+body.dark-mode .form-label {
+    color: #f8f9fa;
+}
+
 .form-text {
     font-size: 0.85rem;
     color: #6c757d;
+}
+
+body.dark-mode .form-text {
+    color: #adb5bd;
 }
 
 .btn-success {
@@ -71,10 +106,22 @@
         color: #218838;
     }
 
+body.dark-mode .btn-link {
+    color: #4ade80;
+}
+
+    body.dark-mode .btn-link:hover {
+        color: #6ee7a0;
+    }
+
 /* Tooltip styles */
 .form-label[data-toggle="tooltip"] {
     cursor: help;
     border-bottom: 1px dotted #28a745;
+}
+
+body.dark-mode .form-label[data-toggle="tooltip"] {
+    border-bottom-color: #4ade80;
 }
 
 /* Make sure checkboxes align properly */
@@ -85,4 +132,39 @@
 /* Custom styling for specific sections */
 #solarDetails, #windDetails, #batteryDetails, #evDetails {
     display: none;
+}
+
+/* Additional dark mode specific styling */
+body.dark-mode .card-body {
+    color: #f8f9fa;
+}
+
+    body.dark-mode .card-body p {
+        color: #f8f9fa;
+    }
+
+    body.dark-mode .card-body strong {
+        color: #ffffff;
+    }
+
+/* Style for disabled fields in forms */
+body.dark-mode .form-control:disabled,
+body.dark-mode .form-control[readonly] {
+    background-color: #495057;
+    color: #adb5bd;
+}
+
+/* Add styling for the form sections */
+body.dark-mode .form-section {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Improve readability of date inputs in dark mode */
+body.dark-mode input[type="date"] {
+    color-scheme: dark;
+}
+
+/* Fix form-check text color in dark mode */
+body.dark-mode .form-check-label {
+    color: #f8f9fa;
 }

@@ -69,6 +69,7 @@
     <Folder Include="EcoPlot\static\css\" />
     <Folder Include="EcoPlot\static\icons\" />
     <Folder Include="EcoPlot\static\logos\" />
+    <Folder Include="EcoPlot\static\images\" />
     <Folder Include="EcoPlot\static\scripts\" />
     <Folder Include="EcoPlot\templates\" />
     <Folder Include="EcoPlot\templates\auth\" />
@@ -79,8 +80,10 @@
     <Content Include="EcoPlot\data\ecoplot.db" />
     <Content Include="EcoPlot\static\css\dashboard.css" />
     <Content Include="EcoPlot\static\css\device.css" />
+    <Content Include="EcoPlot\static\css\index.css" />
     <Content Include="EcoPlot\static\css\profile.css" />
     <Content Include="EcoPlot\static\css\recommendations.css" />
+    <Content Include="EcoPlot\static\css\theme.css" />
     <Content Include="EcoPlot\static\icons\computer.png" />
     <Content Include="EcoPlot\static\icons\dishwasher.png" />
     <Content Include="EcoPlot\static\icons\dryer.png" />
@@ -95,12 +98,15 @@
     <Content Include="EcoPlot\static\icons\tv.png" />
     <Content Include="EcoPlot\static\icons\washing_machine.png" />
     <Content Include="EcoPlot\static\icons\water_heater.png" />
+    <Content Include="EcoPlot\static\images\hero-bg.jpg" />
     <Content Include="EcoPlot\static\js\admin.js" />
     <Content Include="EcoPlot\static\css\admin.css" />
     <Content Include="EcoPlot\static\js\dashboard.js" />
     <Content Include="EcoPlot\static\js\device.js" />
+    <Content Include="EcoPlot\static\js\index.js" />
     <Content Include="EcoPlot\static\js\profile.js" />
     <Content Include="EcoPlot\static\js\recommendations.js" />
+    <Content Include="EcoPlot\static\js\theme.js" />
     <Content Include="EcoPlot\static\logos\bosch.png" />
     <Content Include="EcoPlot\static\logos\electrolux.png" />
     <Content Include="EcoPlot\static\logos\frigidaire.png" />

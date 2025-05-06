@@ -1,0 +1,267 @@
+/* EcoPlot/static/css/index.css */
+.hero-section {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, rgba(40,167,69,0.8) 0%, rgba(0,123,255,0.8) 100%), url('/static/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-tagline {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.hero-cta {
+    margin-top: 2rem;
+}
+
+    .hero-cta .btn {
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        margin: 0 0.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .hero-cta .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+/* Features section */
+.features-section {
+    padding: 5rem 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+    .section-title h2 {
+        font-weight: 600;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 0.5rem;
+    }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: #28a745;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+.feature-card {
+    padding: 2rem;
+    height: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #28a745;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* How it works section */
+.how-it-works {
+    padding: 5rem 0;
+    background-color: rgba(40,167,69,0.05);
+}
+
+.step-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background-color: white;
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+body.dark-mode .step-card {
+    background-color: var(--dark-card-bg);
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.step-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+/* Benefits section */
+.benefits-section {
+    padding: 5rem 0;
+}
+
+.benefit-item {
+    display: flex;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.benefit-icon {
+    font-size: 2rem;
+    color: #28a745;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.benefit-content h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+/* CTA section */
+.cta-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(40,167,69,0.9) 0%, rgba(0,123,255,0.9) 100%);
+    color: white;
+    text-align: center;
+}
+
+.cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons .btn {
+    padding: 0.75rem 2rem;
+    margin: 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.3s;
+}
+
+.delay-3 {
+    animation-delay: 0.5s;
+}
+
+/* Statistics section */
+.stats-section {
+    padding: 5rem 0;
+    background-color: #f8f9fa;
+}
+
+body.dark-mode .stats-section {
+    background-color: var(--dark-bg);
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #28a745;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 4rem 0;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .section-title h2 {
+        font-size: 2rem;
+    }
+
+    .feature-card, .step-card {
+        margin-bottom: 2rem;
+    }
+
+    .cta-title {
+        font-size: 2rem;
+    }
+}

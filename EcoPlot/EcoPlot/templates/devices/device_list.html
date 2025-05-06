@@ -5,7 +5,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/device.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,7 @@
             <h1 class="mb-0">{{ brand.name }} {{ device_type.name }}</h1>
         </div>
         <button class="btn btn-success" onclick="DeviceManager.showAddModal('{{ device_type.id }}', '{{ brand.id }}')">
-            <i class="fas fa-plus me-2"></i> Add New Device
+            <i class="bi bi-plus-lg me-2"></i> Add New Device
         </button>
     </div>
 
@@ -35,16 +35,16 @@
         {% for device in user_devices %}
         <div class="col-md-4 mb-4">
             <div class="card device-list-card shadow-sm h-100">
-                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0">{{ device.name }}</h5>
                     <div class="dropdown">
                         <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v"></i>
+                            <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#" onclick="DeviceManager.editDevice({{ device.id }})"><i class="fas fa-edit me-2"></i> Edit</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="DeviceManager.editDevice({{ device.id }})"><i class="bi bi-pencil me-2"></i> Edit</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="#" onclick="DeviceManager.deleteDevice({{ device.id }})"><i class="fas fa-trash me-2"></i> Delete</a></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="DeviceManager.deleteDevice({{ device.id }})"><i class="bi bi-trash me-2"></i> Delete</a></li>
                         </ul>
                     </div>
                 </div>
@@ -68,19 +68,19 @@
                     </div>
                     {% endif %}
                 </div>
-                <div class="card-footer bg-white">
+                <div class="card-footer">
                     <div>
                         {% if device.is_smart_device %}
-                        <span class="badge bg-primary device-badge"><i class="fas fa-wifi me-1"></i> Smart</span>
+                        <span class="badge bg-primary device-badge"><i class="bi bi-wifi me-1"></i> Smart</span>
                         {% endif %}
                         {% if device.is_ev_charger %}
-                        <span class="badge bg-success device-badge"><i class="fas fa-plug me-1"></i> EV Charger</span>
+                        <span class="badge bg-success device-badge"><i class="bi bi-plug me-1"></i> EV Charger</span>
                         {% endif %}
                         {% if device.is_schedulable %}
-                        <span class="badge bg-info device-badge"><i class="fas fa-clock me-1"></i> Schedulable</span>
+                        <span class="badge bg-info device-badge"><i class="bi bi-clock me-1"></i> Schedulable</span>
                         {% endif %}
                         {% if device.api_controllable %}
-                        <span class="badge bg-warning text-dark device-badge"><i class="fas fa-code me-1"></i> API</span>
+                        <span class="badge bg-warning text-dark device-badge"><i class="bi bi-code-slash me-1"></i> API</span>
                         {% endif %}
                     </div>
                 </div>
@@ -91,7 +91,7 @@
         <div class="col-12">
             <div class="alert alert-info">
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-info-circle fa-2x me-3"></i>
+                    <i class="bi bi-info-circle-fill fa-2x me-3"></i>
                     <div>
                         <h5 class="mb-1">No devices found</h5>
                         <p class="mb-0">You haven't added any {{ brand.name }} {{ device_type.name|lower }} devices yet. Click the "Add New Device" button to get started.</p>
