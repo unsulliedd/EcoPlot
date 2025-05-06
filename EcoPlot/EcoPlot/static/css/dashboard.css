@@ -1,0 +1,191 @@
+/* EcoPlot/static/css/dashboard.css */
+
+/* Dashboard Summary Cards */
+.summary-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+    .summary-card:hover {
+        transform: translateY(-5px);
+    }
+
+.summary-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.summary-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.summary-change {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+    .summary-change .fa-arrow-up {
+        color: #28a745;
+    }
+
+    .summary-change .fa-arrow-down {
+        color: #dc3545;
+    }
+
+/* Charts */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Card styling */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem 1.25rem;
+}
+
+.card-title {
+    color: #495057;
+    font-weight: 600;
+}
+
+/* Device list */
+.device-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+    .device-item:last-child {
+        border-bottom: none;
+    }
+
+.device-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: #495057;
+    font-size: 18px;
+}
+
+.device-info {
+    flex-grow: 1;
+}
+
+.device-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: #212529;
+}
+
+.device-type {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.device-usage {
+    font-weight: 600;
+    color: #495057;
+}
+
+.device-progress {
+    height: 6px;
+    margin-top: 5px;
+    background-color: #e9ecef;
+}
+
+/* Recommendations */
+.recommendation-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+    .recommendation-item:last-child {
+        border-bottom: none;
+    }
+
+.recommendation-content {
+    font-size: 14px;
+    color: #212529;
+    margin-bottom: 5px;
+}
+
+.recommendation-saving {
+    font-size: 12px;
+    color: #28a745;
+    font-weight: 600;
+}
+
+/* Optimal Usage Times */
+.optimal-times {
+    padding: 10px 15px;
+}
+
+.optimal-time-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+    .optimal-time-item:last-child {
+        border-bottom: none;
+    }
+
+.optimal-time-period {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.optimal-time-good {
+    color: #28a745;
+}
+
+.optimal-time-avoid {
+    color: #dc3545;
+}
+
+.optimal-time-desc {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    margin-bottom: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .summary-value {
+        font-size: 20px;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+}

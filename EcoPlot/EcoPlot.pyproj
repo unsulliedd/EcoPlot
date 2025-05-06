@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EcoPlot\data\ecoplot.db" />
+    <Content Include="EcoPlot\static\css\dashboard.css" />
     <Content Include="EcoPlot\static\css\device.css" />
     <Content Include="EcoPlot\static\css\profile.css" />
     <Content Include="EcoPlot\static\css\recommendations.css" />
@@ -96,6 +97,7 @@
     <Content Include="EcoPlot\static\icons\water_heater.png" />
     <Content Include="EcoPlot\static\js\admin.js" />
     <Content Include="EcoPlot\static\css\admin.css" />
+    <Content Include="EcoPlot\static\js\dashboard.js" />
     <Content Include="EcoPlot\static\js\device.js" />
     <Content Include="EcoPlot\static\js\profile.js" />
     <Content Include="EcoPlot\static\js\recommendations.js" />

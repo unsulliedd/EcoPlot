@@ -3,49 +3,201 @@
 
 {% block title %}EcoPlot - Dashboard{% endblock %}
 
+{% block extra_css %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
+<div class="dashboard-header">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1>Welcome, {{ current_user.username }}!</h1>
+            <p class="lead">Your energy optimization dashboard</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-success active" id="day-view">Day</button>
+                <button type="button" class="btn btn-outline-success" id="week-view">Week</button>
+                <button type="button" class="btn btn-outline-success" id="month-view">Month</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Energy Summary Cards -->
 <div class="row mb-4">
-    <div class="col-md-12">
-        <h1>Welcome, {{ current_user.username }}!</h1>
-        <p class="lead">This is your energy optimization dashboard.</p>
+    <div class="col-md-3">
+        <div class="card summary-card">
+            <div class="card-body">
+                <div class="summary-icon bg-success">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h5 class="card-title">Energy Used</h5>
+                <div class="summary-value" id="energy-used">0 kWh</div>
+                <div class="summary-change" id="energy-used-change">
+                    <i class="fas fa-arrow-down"></i> 0%
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card summary-card">
+            <div class="card-body">
+                <div class="summary-icon bg-primary">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h5 class="card-title">Solar Generated</h5>
+                <div class="summary-value" id="solar-generated">0 kWh</div>
+                <div class="summary-change" id="solar-generated-change">
+                    <i class="fas fa-arrow-up"></i> 0%
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card summary-card">
+            <div class="card-body">
+                <div class="summary-icon bg-info">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h5 class="card-title">Carbon Saved</h5>
+                <div class="summary-value" id="carbon-saved">0 kg</div>
+                <div class="summary-change" id="carbon-saved-change">
+                    <i class="fas fa-arrow-up"></i> 0%
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card summary-card">
+            <div class="card-body">
+                <div class="summary-icon bg-warning">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h5 class="card-title">Cost Savings</h5>
+                <div class="summary-value" id="cost-savings">$0</div>
+                <div class="summary-change" id="cost-savings-change">
+                    <i class="fas fa-arrow-up"></i> 0%
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
+<!-- Main Dashboard Content -->
 <div class="row">
-    <div class="col-md-4">
+    <!-- Left Column - Charts -->
+    <div class="col-md-8">
+        <!-- Energy Usage Chart -->
         <div class="card mb-4">
-            <div class="card-header bg-success text-white">
-                <h5 class="mb-0">Your Devices</h5>
+            <div class="card-header">
+                <h5 class="card-title mb-0">Energy Usage</h5>
             </div>
             <div class="card-body">
-                <p>Add your devices to get personalized recommendations.</p>
-                <a href="{{ url_for('devices.index') }}" class="btn btn-outline-success">Manage Devices</a>
+                <div class="chart-container">
+                    <canvas id="energyUsageChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Device Consumption Chart -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Device Energy Consumption</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="deviceConsumptionChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Energy Timeline -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Energy Timeline</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="energyTimelineChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Right Column - Top Devices & Recommendations -->
     <div class="col-md-4">
+        <!-- Your Devices Card -->
         <div class="card mb-4">
-            <div class="card-header bg-success text-white">
-                <h5 class="mb-0">Energy Production</h5>
+            <div class="card-header">
+                <h5 class="card-title mb-0">Top Energy Consumers</h5>
             </div>
             <div class="card-body">
-                <p>Configure your solar energy production details.</p>
-                <a href="{{ url_for('main.profile') }}" class="btn btn-outline-success">Update Profile</a>
+                <div id="topDevicesList">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('devices.index') }}" class="btn btn-outline-success btn-sm">Manage Devices</a>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-4">
+        <!-- Top Recommendations Card -->
         <div class="card mb-4">
-            <div class="card-header bg-success text-white">
-                <h5 class="mb-0">Recommendations</h5>
+            <div class="card-header">
+                <h5 class="card-title mb-0">Recommended Actions</h5>
             </div>
             <div class="card-body">
-                <p>View your energy optimization recommendations.</p>
-                <a href="#" class="btn btn-outline-success">View Recommendations</a>
+                <div id="recommendationsList">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('main.recommendations') }}" class="btn btn-outline-success btn-sm">View All Recommendations</a>
+            </div>
+        </div>
+
+        <!-- Peak Hours Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Optimal Usage Times</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="optimal-times">
+                    <div class="optimal-time-item">
+                        <div class="optimal-time-period optimal-time-good">
+                            <i class="fas fa-check-circle"></i> 10:00 AM - 2:00 PM
+                        </div>
+                        <div class="optimal-time-desc">Solar production peak</div>
+                    </div>
+                    <div class="optimal-time-item">
+                        <div class="optimal-time-period optimal-time-avoid">
+                            <i class="fas fa-times-circle"></i> 5:00 PM - 8:00 PM
+                        </div>
+                        <div class="optimal-time-desc">Peak pricing hours</div>
+                    </div>
+                    <div class="optimal-time-item">
+                        <div class="optimal-time-period optimal-time-good">
+                            <i class="fas fa-check-circle"></i> 11:00 PM - 5:00 AM
+                        </div>
+                        <div class="optimal-time-desc">Lowest energy rates</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %}
